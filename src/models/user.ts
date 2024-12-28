@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const instructorSchema = new Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -19,7 +19,13 @@ const instructorSchema = new Schema({
         required: true,
         minimumLength: [8, "Email must be at least 8 characters long"],
         maximumLength: [1024, "Password must be at most 1024 characters long"],
+    },
+    role: {
+        type: String,
+        enum: ["learner", "instructor"],
+        default: "learner",
+        required: true
     }
-});
+}, { timestamps: true });
 
-export default mongoose.models.Instructor || mongoose.model("Instructor", instructorSchema);
+export default mongoose.models.User || mongoose.model("User", userSchema);

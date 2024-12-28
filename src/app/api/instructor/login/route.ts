@@ -1,5 +1,5 @@
 import db from '@/lib/db';
-import Instructor from '@/models/instructor';
+import User from '@/models/user';
 import { NextRequest, NextResponse } from 'next/server';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -14,16 +14,16 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { email, password } = reqBody;
 
-        // Find the instructor by email
-        const instructor = await Instructor.findOne({ email });
+        // Find the user by email
+        const user = await User.findOne({ email });
 
-        if (instructor) {
+        if (user) {
             // Check if password matches
-            const match = await bcryptjs.compare(password, instructor.password);
+            const match = await bcryptjs.compare(password, user.password);
 
             if (match) {
                 // Generate JWT Token after Instructor is found
-                const token = jwt.sign({ userId: instructor._id, email: instructor.email, name: instructor.name }, process.env.JWT_SECRET!, { expiresIn: '30d' });
+                const token = jwt.sign({ userId: user._id, email: user.email, name: user.name }, process.env.JWT_SECRET!, { expiresIn: '30d' });
 
                 // Success case: Return success response with a message
                 const response = NextResponse.json({

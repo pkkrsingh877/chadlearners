@@ -51,7 +51,7 @@ export default function Signup() {
                 className="rounded-md p-4 border border-black" />
             <button className="bg-black text-white rounded-md p-4" onClick={handleSubmit}>Signup</button>
             <p>Already have an Account?</p>
-            <Link href="/auth/login" className='text-blue-500'>Login</Link>
+            <Link href="/instructor/login" className='text-blue-500'>Login</Link>
         </div>
     )
 }

@@ -43,9 +43,11 @@ export default function Login() {
                 value={user.password}
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 className="rounded-md p-4 border border-black" />
+            <input type="hidden" name="role"
+                value="instructor" />
             <button className="bg-black text-white rounded-md p-4" onClick={handleSubmit}>Login</button>
             <p>Don't have an Account?</p>
-            <Link href="/auth/signup" className="text-blue-500">Signup</Link>
+            <Link href="/instructor/signup" className="text-blue-500">Signup</Link>
         </div>
     )
 }

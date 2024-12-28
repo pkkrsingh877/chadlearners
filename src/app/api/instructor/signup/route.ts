@@ -1,5 +1,5 @@
 import db from '@/lib/db';
-import Instructor from '@/models/instructor';
+import User from '@/models/user';
 import { NextRequest, NextResponse } from 'next/server';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { name, email, password } = reqBody;
 
-        const user = await Instructor.findOne({ email });
+        const user = await User.findOne({ email });
 
         if (user) {
             return NextResponse.json({
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
         const salt = await bcryptjs.genSalt(10);
         const hashedPassword = await bcryptjs.hash(password, salt);
-        const newUser = new Instructor({ name, email, password: hashedPassword });
+        const newUser = new User({ name, email, password: hashedPassword });
         const savedUser = await newUser.save();
 
         // Generate JWT Token after New User is saved
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
         // Success case: Return success response with a message
         const response = NextResponse.json({
             success: true,
-            message: "Instructor Created Successfully",
+            message: "User Created Successfully",
             token,
             status: 200,
             data: savedUser
