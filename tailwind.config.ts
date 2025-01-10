@@ -9,10 +9,6 @@ export default {
   darkMode: "class", // This will enable dark mode based on a class (you can toggle with class="dark")
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['Lato', 'sans-serif'], // Default body font
-        heading: ['Poppins', 'sans-serif'], // Default heading font
-      },
       colors: {
         // Dark mode palette (default)
         darkBackground: "#222831", // HEX
